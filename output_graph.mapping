@@ -1,0 +1,131 @@
+<?xml version="1.0" ?>
+<mapping>
+	<map>
+		<framework name="Reshape_1/shape" out_port_id="0"/>
+		<IR id="28" name="Reshape_1/shape/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Minimum_3" out_port_id="0"/>
+		<IR id="44" name="Minimum_3/negate_out_" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="raw_logits/shape" out_port_id="0"/>
+		<IR id="46" name="raw_logits/shape/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="previous_state_c/read" out_port_id="0"/>
+		<IR id="31" name="previous_state_c/read/placeholder_port_0" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="previous_state_c/read" out_port_id="0"/>
+		<IR id="31" name="previous_state_c/read/placeholder_port_0" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="Minimum" out_port_id="0"/>
+		<IR id="11" name="Minimum/negate_out_" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="logits" out_port_id="0"/>
+		<IR id="48" name="Softmax" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Softmax" out_port_id="0"/>
+		<IR id="48" name="Softmax" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Reshape_1" out_port_id="0"/>
+		<IR id="29" name="Reshape_1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="raw_logits" out_port_id="0"/>
+		<IR id="47" name="raw_logits" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="lstm_fused_cell/mul" out_port_id="0"/>
+		<IR id="34" name="lstm_fused_cell/mul" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Add_1" out_port_id="0"/>
+		<IR id="12" name="MatMul_1" out_port_id="3"/>
+	</map>
+	<map>
+		<framework name="Relu" out_port_id="0"/>
+		<IR id="5" name="Relu" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Add_3" out_port_id="0"/>
+		<IR id="37" name="MatMul_3" out_port_id="3"/>
+	</map>
+	<map>
+		<framework name="Minimum_1" out_port_id="0"/>
+		<IR id="19" name="Minimum_1/negate_out_" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Relu_1" out_port_id="0"/>
+		<IR id="13" name="Relu_1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="lstm_fused_cell/BlockLSTM:6" out_port_id="6"/>
+		<IR id="32" name="lstm_fused_cell/BlockLSTM" out_port_id="5"/>
+	</map>
+	<map>
+		<framework name="Reshape/shape" out_port_id="0"/>
+		<IR id="2" name="Reshape/shape/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Add" out_port_id="0"/>
+		<IR id="4" name="MatMul" out_port_id="3"/>
+	</map>
+	<map>
+		<framework name="previous_state_h/read" out_port_id="0"/>
+		<IR id="30" name="previous_state_h/read/placeholder_port_0" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="previous_state_h/read" out_port_id="0"/>
+		<IR id="30" name="previous_state_h/read/placeholder_port_0" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="Relu_2" out_port_id="0"/>
+		<IR id="21" name="Relu_2" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Relu_3" out_port_id="0"/>
+		<IR id="38" name="Relu_3" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="transpose" out_port_id="0"/>
+		<IR id="1" name="transpose" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Add_2" out_port_id="0"/>
+		<IR id="20" name="MatMul_2" out_port_id="3"/>
+	</map>
+	<map>
+		<framework name="Add_4" out_port_id="0"/>
+		<IR id="45" name="MatMul_4" out_port_id="3"/>
+	</map>
+	<map>
+		<framework name="lstm_fused_cell/Tile" out_port_id="0"/>
+		<IR id="33" name="lstm_fused_cell/Tile/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Minimum_2" out_port_id="0"/>
+		<IR id="27" name="Minimum_2/negate_out_" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Reshape" out_port_id="0"/>
+		<IR id="3" name="Reshape" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Reshape_2/shape" out_port_id="0"/>
+		<IR id="35" name="Reshape_2/shape/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="input_node" out_port_id="0"/>
+		<IR id="0" name="input_node" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="Reshape_2" out_port_id="0"/>
+		<IR id="36" name="Reshape_2" out_port_id="2"/>
+	</map>
+</mapping>

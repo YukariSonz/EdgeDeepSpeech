@@ -1,0 +1,834 @@
+<?xml version="1.0" ?>
+<net batch="1" name="output_graph" version="5">
+	<layers>
+		<layer id="0" name="input_node" precision="FP16" type="Input">
+			<output>
+				<port id="0">
+					<dim>1</dim>
+					<dim>26</dim>
+					<dim>16</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="1" name="transpose" precision="FP16" type="Permute">
+			<data order="2,1,0,3"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>26</dim>
+					<dim>16</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>26</dim>
+					<dim>1</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="2" name="Reshape/shape/Output_0/Data__const" precision="FP16" type="Const">
+			<output>
+				<port id="1">
+					<dim>2</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="0" size="4"/>
+			</blobs>
+		</layer>
+		<layer id="3" name="Reshape" precision="FP16" type="Reshape">
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>26</dim>
+					<dim>1</dim>
+					<dim>19</dim>
+				</port>
+				<port id="1">
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2">
+					<dim>16</dim>
+					<dim>494</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="4" name="MatMul" precision="FP16" type="FullyConnected">
+			<data out-size="2048"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>494</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="4" size="2023424"/>
+				<biases offset="2023428" size="4096"/>
+			</blobs>
+		</layer>
+		<layer id="5" name="Relu" precision="FP16" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="6" name="Minimum/negate1_" precision="FP16" type="Power">
+			<data power="1" scale="-1" shift="0"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="7" name="458/copy_const" precision="FP16" type="Const">
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="2027524" size="2"/>
+			</blobs>
+		</layer>
+		<layer id="8" name="Minimum/Max_/Broadcast/" precision="FP16" type="Tile">
+			<data axis="0" tiles="16"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="9" name="Minimum/Max_/Broadcast/978" precision="FP16" type="Tile">
+			<data axis="1" tiles="2048"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="10" name="Minimum/Max_" precision="FP16" type="Eltwise">
+			<data operation="max"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="11" name="Minimum/negate_out_" precision="FP16" type="Power">
+			<data power="1" scale="-1" shift="0"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="12" name="MatMul_1" precision="FP16" type="FullyConnected">
+			<data out-size="2048"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="2027526" size="8388608"/>
+				<biases offset="10416134" size="4096"/>
+			</blobs>
+		</layer>
+		<layer id="13" name="Relu_1" precision="FP16" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="14" name="Minimum_1/negate1_" precision="FP16" type="Power">
+			<data power="1" scale="-1" shift="0"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="15" name="472/copy_const" precision="FP16" type="Const">
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="2027524" size="2"/>
+			</blobs>
+		</layer>
+		<layer id="16" name="Minimum_1/Max_/Broadcast/" precision="FP16" type="Tile">
+			<data axis="0" tiles="16"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="17" name="Minimum_1/Max_/Broadcast/974" precision="FP16" type="Tile">
+			<data axis="1" tiles="2048"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="18" name="Minimum_1/Max_" precision="FP16" type="Eltwise">
+			<data operation="max"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="19" name="Minimum_1/negate_out_" precision="FP16" type="Power">
+			<data power="1" scale="-1" shift="0"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="20" name="MatMul_2" precision="FP16" type="FullyConnected">
+			<data out-size="2048"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="10420230" size="8388608"/>
+				<biases offset="18808838" size="4096"/>
+			</blobs>
+		</layer>
+		<layer id="21" name="Relu_2" precision="FP16" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="22" name="Minimum_2/negate1_" precision="FP16" type="Power">
+			<data power="1" scale="-1" shift="0"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="23" name="465/copy_const" precision="FP16" type="Const">
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="2027524" size="2"/>
+			</blobs>
+		</layer>
+		<layer id="24" name="Minimum_2/Max_/Broadcast/" precision="FP16" type="Tile">
+			<data axis="0" tiles="16"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="25" name="Minimum_2/Max_/Broadcast/970" precision="FP16" type="Tile">
+			<data axis="1" tiles="2048"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="26" name="Minimum_2/Max_" precision="FP16" type="Eltwise">
+			<data operation="max"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="27" name="Minimum_2/negate_out_" precision="FP16" type="Power">
+			<data power="1" scale="-1" shift="0"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="28" name="Reshape_1/shape/Output_0/Data__const" precision="FP16" type="Const">
+			<output>
+				<port id="1">
+					<dim>3</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="18812934" size="6"/>
+			</blobs>
+		</layer>
+		<layer id="29" name="Reshape_1" precision="FP16" type="Reshape">
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+				<port id="1">
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2">
+					<dim>16</dim>
+					<dim>1</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="30" name="previous_state_h/read/placeholder_port_0" precision="FP16" type="Input">
+			<output>
+				<port id="0">
+					<dim>1</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="31" name="previous_state_c/read/placeholder_port_0" precision="FP16" type="Input">
+			<output>
+				<port id="0">
+					<dim>1</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="32" name="lstm_fused_cell/BlockLSTM" precision="FP16" type="BlockLSTM">
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>1</dim>
+					<dim>2048</dim>
+				</port>
+				<port id="3">
+					<dim>1</dim>
+					<dim>2048</dim>
+				</port>
+				<port id="4">
+					<dim>1</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="5">
+					<dim>16</dim>
+					<dim>1</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="18812940" size="67108864"/>
+				<biases offset="85921804" size="16384"/>
+			</blobs>
+		</layer>
+		<layer id="33" name="lstm_fused_cell/Tile/Output_0/Data__const" precision="FP16" type="Const">
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>1</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="85938188" size="65536"/>
+			</blobs>
+		</layer>
+		<layer id="34" name="lstm_fused_cell/mul" precision="FP16" type="Eltwise">
+			<data operation="mul"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>1</dim>
+					<dim>2048</dim>
+				</port>
+				<port id="1">
+					<dim>16</dim>
+					<dim>1</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2">
+					<dim>16</dim>
+					<dim>1</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="35" name="Reshape_2/shape/Output_0/Data__const" precision="FP16" type="Const">
+			<output>
+				<port id="1">
+					<dim>2</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="86003724" size="4"/>
+			</blobs>
+		</layer>
+		<layer id="36" name="Reshape_2" precision="FP16" type="Reshape">
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>1</dim>
+					<dim>2048</dim>
+				</port>
+				<port id="1">
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="37" name="MatMul_3" precision="FP16" type="FullyConnected">
+			<data out-size="2048"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="86003728" size="8388608"/>
+				<biases offset="94392336" size="4096"/>
+			</blobs>
+		</layer>
+		<layer id="38" name="Relu_3" precision="FP16" type="ReLU">
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="39" name="Minimum_3/negate1_" precision="FP16" type="Power">
+			<data power="1" scale="-1" shift="0"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="40" name="451/copy_const" precision="FP16" type="Const">
+			<output>
+				<port id="1">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="2027524" size="2"/>
+			</blobs>
+		</layer>
+		<layer id="41" name="Minimum_3/Max_/Broadcast/" precision="FP16" type="Tile">
+			<data axis="0" tiles="16"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="42" name="Minimum_3/Max_/Broadcast/982" precision="FP16" type="Tile">
+			<data axis="1" tiles="2048"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="43" name="Minimum_3/Max_" precision="FP16" type="Eltwise">
+			<data operation="max"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="44" name="Minimum_3/negate_out_" precision="FP16" type="Power">
+			<data power="1" scale="-1" shift="0"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="45" name="MatMul_4" precision="FP16" type="FullyConnected">
+			<data out-size="29"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>2048</dim>
+				</port>
+			</input>
+			<output>
+				<port id="3">
+					<dim>16</dim>
+					<dim>29</dim>
+				</port>
+			</output>
+			<blobs>
+				<weights offset="94396432" size="118784"/>
+				<biases offset="94515216" size="58"/>
+			</blobs>
+		</layer>
+		<layer id="46" name="raw_logits/shape/Output_0/Data__const" precision="FP16" type="Const">
+			<output>
+				<port id="1">
+					<dim>3</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="94515274" size="6"/>
+			</blobs>
+		</layer>
+		<layer id="47" name="raw_logits" precision="FP16" type="Reshape">
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>29</dim>
+				</port>
+				<port id="1">
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2">
+					<dim>16</dim>
+					<dim>1</dim>
+					<dim>29</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="48" name="Softmax" precision="FP16" type="SoftMax">
+			<data axis="2"/>
+			<input>
+				<port id="0">
+					<dim>16</dim>
+					<dim>1</dim>
+					<dim>29</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1">
+					<dim>16</dim>
+					<dim>1</dim>
+					<dim>29</dim>
+				</port>
+			</output>
+		</layer>
+	</layers>
+	<edges>
+		<edge from-layer="0" from-port="0" to-layer="1" to-port="0"/>
+		<edge from-layer="1" from-port="1" to-layer="3" to-port="0"/>
+		<edge from-layer="2" from-port="1" to-layer="3" to-port="1"/>
+		<edge from-layer="3" from-port="2" to-layer="4" to-port="0"/>
+		<edge from-layer="4" from-port="3" to-layer="5" to-port="0"/>
+		<edge from-layer="5" from-port="1" to-layer="6" to-port="0"/>
+		<edge from-layer="7" from-port="1" to-layer="8" to-port="0"/>
+		<edge from-layer="8" from-port="1" to-layer="9" to-port="0"/>
+		<edge from-layer="6" from-port="1" to-layer="10" to-port="0"/>
+		<edge from-layer="9" from-port="1" to-layer="10" to-port="1"/>
+		<edge from-layer="10" from-port="2" to-layer="11" to-port="0"/>
+		<edge from-layer="11" from-port="1" to-layer="12" to-port="0"/>
+		<edge from-layer="12" from-port="3" to-layer="13" to-port="0"/>
+		<edge from-layer="13" from-port="1" to-layer="14" to-port="0"/>
+		<edge from-layer="15" from-port="1" to-layer="16" to-port="0"/>
+		<edge from-layer="16" from-port="1" to-layer="17" to-port="0"/>
+		<edge from-layer="14" from-port="1" to-layer="18" to-port="0"/>
+		<edge from-layer="17" from-port="1" to-layer="18" to-port="1"/>
+		<edge from-layer="18" from-port="2" to-layer="19" to-port="0"/>
+		<edge from-layer="19" from-port="1" to-layer="20" to-port="0"/>
+		<edge from-layer="20" from-port="3" to-layer="21" to-port="0"/>
+		<edge from-layer="21" from-port="1" to-layer="22" to-port="0"/>
+		<edge from-layer="23" from-port="1" to-layer="24" to-port="0"/>
+		<edge from-layer="24" from-port="1" to-layer="25" to-port="0"/>
+		<edge from-layer="22" from-port="1" to-layer="26" to-port="0"/>
+		<edge from-layer="25" from-port="1" to-layer="26" to-port="1"/>
+		<edge from-layer="26" from-port="2" to-layer="27" to-port="0"/>
+		<edge from-layer="27" from-port="1" to-layer="29" to-port="0"/>
+		<edge from-layer="28" from-port="1" to-layer="29" to-port="1"/>
+		<edge from-layer="29" from-port="2" to-layer="32" to-port="0"/>
+		<edge from-layer="30" from-port="0" to-layer="32" to-port="3"/>
+		<edge from-layer="31" from-port="0" to-layer="32" to-port="4"/>
+		<edge from-layer="32" from-port="5" to-layer="34" to-port="0"/>
+		<edge from-layer="33" from-port="1" to-layer="34" to-port="1"/>
+		<edge from-layer="34" from-port="2" to-layer="36" to-port="0"/>
+		<edge from-layer="35" from-port="1" to-layer="36" to-port="1"/>
+		<edge from-layer="36" from-port="2" to-layer="37" to-port="0"/>
+		<edge from-layer="37" from-port="3" to-layer="38" to-port="0"/>
+		<edge from-layer="38" from-port="1" to-layer="39" to-port="0"/>
+		<edge from-layer="40" from-port="1" to-layer="41" to-port="0"/>
+		<edge from-layer="41" from-port="1" to-layer="42" to-port="0"/>
+		<edge from-layer="39" from-port="1" to-layer="43" to-port="0"/>
+		<edge from-layer="42" from-port="1" to-layer="43" to-port="1"/>
+		<edge from-layer="43" from-port="2" to-layer="44" to-port="0"/>
+		<edge from-layer="44" from-port="1" to-layer="45" to-port="0"/>
+		<edge from-layer="45" from-port="3" to-layer="47" to-port="0"/>
+		<edge from-layer="46" from-port="1" to-layer="47" to-port="1"/>
+		<edge from-layer="47" from-port="2" to-layer="48" to-port="0"/>
+	</edges>
+	<meta_data>
+		<MO_version value="2019.1.1-83-g28dfbfd"/>
+		<cli_parameters>
+			<data_type value="FP16"/>
+			<disable_fusing value="False"/>
+			<disable_gfusing value="False"/>
+			<disable_nhwc_to_nchw value="False"/>
+			<disable_resnet_optimization value="False"/>
+			<enable_concat_optimization value="False"/>
+			<extensions value="DIR"/>
+			<framework value="tf"/>
+			<freeze_placeholder_with_value value="{'input_lengths': ['16']}"/>
+			<generate_deprecated_IR_V2 value="False"/>
+			<input value="input_node,previous_state_h/read,previous_state_c/read"/>
+			<input_model value="DIR\output_graph.pb"/>
+			<input_model_is_text value="False"/>
+			<input_shape value="[1,16,19,26],[1,2048],[1,2048]"/>
+			<keep_shape_ops value="False"/>
+			<log_level value="ERROR"/>
+			<mean_scale_values value="{}"/>
+			<mean_values value="()"/>
+			<move_to_preprocess value="False"/>
+			<output_dir value="DIR"/>
+			<placeholder_shapes value="{'input_node': array([ 1, 16, 19, 26], dtype=int64), 'previous_state_h/read': array([   1, 2048], dtype=int64), 'previous_state_c/read': array([   1, 2048], dtype=int64)}"/>
+			<reverse_input_channels value="False"/>
+			<scale_values value="()"/>
+			<silent value="False"/>
+			<version value="False"/>
+			<unset unset_cli_parameters="batch, finegrain_fusing, input_checkpoint, input_meta_graph, model_name, output, saved_model_dir, saved_model_tags, scale, tensorboard_logdir, tensorflow_custom_layer_libraries, tensorflow_custom_operations_config_update, tensorflow_object_detection_api_pipeline_config, tensorflow_operation_patterns, tensorflow_subgraph_patterns, tensorflow_use_custom_operations_config"/>
+		</cli_parameters>
+	</meta_data>
+</net>
