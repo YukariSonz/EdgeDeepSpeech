@@ -1,5 +1,5 @@
 # NCSDeepSpeech
-This repo is for development for DeepSpeech on Neural Compute Stick
+This repo is for development for DeepSpeech on Intel Neural Compute Stick
 
 
 NOTE: This project is still on heavy development
