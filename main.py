@@ -67,6 +67,9 @@ def main():
     res = exec_net.infer({'data': voice})
     print("haha")
 
+
+
+    #TODO implement the output for the inference
     
 
 if __name__ == "__main__":
