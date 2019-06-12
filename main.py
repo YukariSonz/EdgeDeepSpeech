@@ -27,6 +27,7 @@ def build_argparser():
 
 def sound_decode(file):
     data,samplerate = sf.read(file)
+    numpy()
     return data,samplerate
 
 
@@ -51,10 +52,21 @@ def main():
             log.error("Some layers are not supported by the plugin")
             sys.exit(1)
 
-    assert len(net.inputs.keys()) == 2 # 2 inputs for DeepSpeech
-    assert len(net.outputs) == 2 # 2 outputs
+    #assert len(net.inputs.keys()) == 7904 # 2 inputs for DeepSpeech
+    #assert len(net.outputs) == 2048 # [464,2048,2048]
 
+
+
+    voice = sound_decode(args.input)
+
+
+
+
+    exec_net = plugin.load(network = net, num_requsts = 3)
+
+    #exec_net.requests[0].inputs['data'][:] = voice
+    res = exec_net.infer({'data': voice})
+    res
     
-
-
+    
 
