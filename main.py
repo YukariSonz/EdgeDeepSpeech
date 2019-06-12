@@ -26,8 +26,7 @@ def build_argparser():
     return parser
 
 def sound_decode(file):
-    data,samplerate = sf.read(file)
-    numpy()
+    data,samplerate = sf.read(file,always_2d=True,out=np.ndarray)
     return data,samplerate
 
 
@@ -67,6 +66,6 @@ def main():
     #exec_net.requests[0].inputs['data'][:] = voice
     res = exec_net.infer({'data': voice})
     res
-    
+
     
 
