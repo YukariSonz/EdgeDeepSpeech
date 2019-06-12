@@ -9,5 +9,5 @@ https://docs.openvinotoolkit.org/latest/_docs_MO_DG_prepare_model_convert_model_
 
 Note: When converting the model, remember to selecte FP16 for the data type as NCS doesn't support FP32 (the default value)
 
-###Current Issue
+### Current Issue
 Memory: Due to limited memory on Neural Compute Stick and Complex speech to text model
