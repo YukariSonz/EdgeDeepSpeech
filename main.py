@@ -28,6 +28,7 @@ def build_argparser():
 def sound_decode(file):
     data,samplerate = sf.read(file,always_2d=True)
     data = data.sum(axis=1)/2
+    #log.info("The sample rate is "+str(samplerate))
     return data
 
 
@@ -37,6 +38,7 @@ def main():
     model_xml = args.model #File path for the model
     model_bin = os.path.splitext(model_xml)[0] + ".bin"
 
+    #log.info("Loading the network files model")
 
 
     plugin = IEPlugin(device = args.device, plugin_dirs = args.plugin_dir)
@@ -65,7 +67,7 @@ def main():
 
     #exec_net.requests[0].inputs['data'][:] = voice
     res = exec_net.infer({'data': voice})
-    print("haha")
+    #print("haha")
 
 
 
