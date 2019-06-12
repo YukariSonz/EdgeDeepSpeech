@@ -11,3 +11,8 @@ Note: When converting the model, remember to selecte FP16 for the data type as N
 
 ## Current Issue
 Memory: Due to limited memory on Neural Compute Stick and Complex speech to text model
+
+
+## TODO
+ - Resolve the memory issue
+ - Produce the real output after inference 
