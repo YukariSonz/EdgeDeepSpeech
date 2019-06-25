@@ -66,7 +66,7 @@ def main():
     exec_net = plugin.load(network = net, num_requests = 3)
 
     #exec_net.requests[0].inputs['data'][:] = voice
-    res = exec_net.infer({'data': voice})
+    res = exec_net.infer({'input_node': voice})
     #print("haha")
 
 
