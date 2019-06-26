@@ -58,7 +58,7 @@ def infer_sound(graph,audio):
 	
 	output, userobj = graph.GetResult()
 	
-	print(order)
+	print(output)
 
 def close_ncs_device(device,graph):
 	graph.DeallocateGraph()
