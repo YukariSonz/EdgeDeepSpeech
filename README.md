@@ -22,4 +22,4 @@ Memory: Due to limited memory on Neural Compute Stick and Complex speech to text
 
 Use NCSDK version instead.
 
-https://movidius.github.io/ncsdk/index.html
+Know more about NCSDK: https://movidius.github.io/ncsdk/index.html
