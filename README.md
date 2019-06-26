@@ -16,3 +16,7 @@ Memory: Due to limited memory on Neural Compute Stick and Complex speech to text
 ## TODO
  - Resolve the memory issue
  - Produce the real output after inference 
+
+
+## UPDATE
+Use NCSDK version instead.
