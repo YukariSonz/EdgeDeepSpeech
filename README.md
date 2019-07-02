@@ -1,5 +1,5 @@
-# NCSDeepSpeech
-This repo is for development for DeepSpeech on Intel Neural Compute Stick
+# EdgeDeepSpeech
+This repo is for development for DeepSpeech on Edge Devices (such as RPi, RPi with neural network accelerators such as Intel Neural Compute Stick, Google Coral EdgeTPU
 
 
 NOTE: This project is still on heavy development
